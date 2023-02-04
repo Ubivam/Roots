@@ -23,22 +23,22 @@ public class TileGridChecker : MonoBehaviour
 		{
 			if (firstPos.x < secondPos.x)
 			{
-				return firstTile.GetConnectivity(Tile.Side.Right) && secondTile.GetConnectivity(Tile.Side.Left);
+				return firstTile.GetConnectivity(Tile.Side.Right, 0) && secondTile.GetConnectivity(Tile.Side.Left, 0);
 			}
 			else
 			{
-				return firstTile.GetConnectivity(Tile.Side.Left) && secondTile.GetConnectivity(Tile.Side.Right);
+				return firstTile.GetConnectivity(Tile.Side.Left, 0) && secondTile.GetConnectivity(Tile.Side.Right, 0);
 			}
 		}
 		else
 		{
 			if (firstPos.y < secondPos.y)
 			{
-				return firstTile.GetConnectivity(Tile.Side.Down) && secondTile.GetConnectivity(Tile.Side.Up);
+				return firstTile.GetConnectivity(Tile.Side.Down, 0) && secondTile.GetConnectivity(Tile.Side.Up, 0);
 			}
 			else
 			{
-				return firstTile.GetConnectivity(Tile.Side.Up) && secondTile.GetConnectivity(Tile.Side.Down);
+				return firstTile.GetConnectivity(Tile.Side.Up, 0) && secondTile.GetConnectivity(Tile.Side.Down, 0);
 			}
 
 		}
