@@ -16,12 +16,11 @@ public class Tile : ScriptableObject
 	[SerializeField] private bool[] connectivity = new bool[4];
 	[SerializeField] private Sprite sprite;
 
-	public GameObject InstantiateTile()
+	public GameObject InstantiateTile(TileComponent tilePrefab)
 	{
-		var gameObject = new GameObject("Tile");
-		var spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
-		spriteRenderer.sprite = sprite;
-		return gameObject;
+		var tile = Instantiate(tilePrefab);
+		tile.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+		return tile.gameObject;
 	}
 	
 	public bool GetConnectivity(Side side, float orientation)

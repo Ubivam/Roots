@@ -7,6 +7,7 @@ public class Level : ScriptableObject
 {
 	public List<LevelCell> Tiles;
 	public int SideLength;
+	public TileComponent TilePrefab;
 
 	public GameObject InstantiateLevel()
 	{
@@ -27,14 +28,14 @@ public class Level : ScriptableObject
 			var row = index % width;
 			var column = index / width;
 			
-			var tile = cell.Tile.InstantiateTile();
+			var tile = cell.Tile.InstantiateTile(TilePrefab);
 			tile.name += $" [{column}, {row}]";
 			tile.transform.parent = gameObject.transform;
 			var deltaPosition = new Vector3(row - height / 2f + 0.5f, 0.05f, column - width / 2f + 0.5f);
 			deltaPosition.x *= tile.transform.lossyScale.x;
 			deltaPosition.z *= tile.transform.lossyScale.z;
 			tile.transform.localPosition = deltaPosition;  
-			tile.transform.localEulerAngles = new Vector3(90, cell.Rotation, 0);
+			tile.transform.localEulerAngles = new Vector3(0, cell.Rotation, 0);
 		}
 
 		return gameObject;
