@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc8317d845d616418fda0d1b3817cf3, type: 3}
   m_Name: Joint
   m_EditorClassIdentifier: 
-  connectivity: 01010000
-  sprite: {fileID: 21300000, guid: dcafb1ae2d7e445eb824ae32e33679d4, type: 3}
+  connectivity: 00000101
+  sprite: {fileID: 21300000, guid: 58f35d8e1ab554eb99bb86b57a5b57e4, type: 3}
