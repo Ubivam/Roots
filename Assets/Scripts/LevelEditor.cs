@@ -201,7 +201,7 @@ public class LevelEditor : MonoBehaviour
 	private void UpdateLevelTileCell()
 	{
 		int gridSize = tileButtons.GetLength(0);
-		int row = gridSize - selectedTileButtonRow - 1;
+		int row = gridSize - selectedTileButtonRow - 1; // Compensate for flipped levels
 		int column = selectedTileButtonColumn;
 		int tileAssetIndex = gridSize * row + column;
 
@@ -210,6 +210,6 @@ public class LevelEditor : MonoBehaviour
 			level.Tiles[tileAssetIndex].Tile = tiles.assets[selectedTileButtonAssetId];
 		}
 
-		level.Tiles[tileAssetIndex].Rotation = tileButtons[selectedTileButtonRow, selectedTileButtonColumn].GetComponent<RectTransform>().localEulerAngles.z;
+		level.Tiles[tileAssetIndex].Rotation = 360f - tileButtons[selectedTileButtonRow, selectedTileButtonColumn].GetComponent<RectTransform>().localEulerAngles.z;
 	}
 }
