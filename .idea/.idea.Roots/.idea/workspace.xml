@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8a9a0203-9f82-4dc4-85ad-96367daa0337" name="Changes" comment="Upto date">
+    <list default="true" id="8a9a0203-9f82-4dc4-85ad-96367daa0337" name="Changes" comment="End game check">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Roots/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Roots/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Level.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Level.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/LevelController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LevelController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TileAsset.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TileAsset.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TileComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TileComponent.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +24,9 @@
     <setting file="mock:///Users/Ubivam/Desktop/Roots/Assets/Scripts/LevelController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/Ubivam/Desktop/Roots/Assets/Scripts/TileAsset.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/Ubivam/Desktop/Roots/Assets/Scripts/TileAsset.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/Ubivam/Desktop/Roots/Assets/Scripts/TileAsset.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TileComponent.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Users/Ubivam/Desktop/Roots/Assets/Scripts/TileComponent.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/Ubivam/Desktop/Roots/Assets/Sprites/Pond2.png.meta" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/Ubivam/Desktop/Roots/Assets/Sprites/Tree.png.meta" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/Ubivam/Desktop/Roots/UserSettings/EditorUserSettings.asset" root0="SKIP_HIGHLIGHTING" />
@@ -150,7 +149,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675548017392</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="End game check">
+      <created>1675549021234</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1675549021234</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,36 +184,37 @@
     <MESSAGE value="Empty, bool checks" />
     <MESSAGE value="Graph mechanics" />
     <MESSAGE value="Upto date" />
-    <option name="LAST_COMMIT_MESSAGE" value="Upto date" />
+    <MESSAGE value="End game check" />
+    <option name="LAST_COMMIT_MESSAGE" value="End game check" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/LevelController.cs</url>
-          <line>74</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/LevelController.cs" initialLine="75" containingFunctionPresentation="method 'GetNeighborsFromTrees'">
+          <line>85</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/LevelController.cs" initialLine="73" containingFunctionPresentation="method 'ExpandRootTiles'">
             <startOffsets>
-              <option value="1617" />
+              <option value="1807" />
             </startOffsets>
             <endOffsets>
-              <option value="1637" />
+              <option value="1825" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="18" />
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/LevelController.cs</url>
-          <line>84</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/LevelController.cs" initialLine="85" containingFunctionPresentation="method 'GetNeighborsFromTrees'">
+          <line>86</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/LevelController.cs" initialLine="74" containingFunctionPresentation="method 'ExpandRootTiles'">
             <startOffsets>
-              <option value="1897" />
+              <option value="1828" />
             </startOffsets>
             <endOffsets>
-              <option value="1950" />
+              <option value="1861" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="19" />
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

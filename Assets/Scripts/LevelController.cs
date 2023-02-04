@@ -11,6 +11,7 @@ public class LevelController : MonoBehaviour
 	private List<TileComponent> tiles;
 	private Queue<TileComponent> _rootedTiles;
 	private List<TileComponent> _rootedTilesList;
+	private bool _isEndGame;
 	[SerializeField] private Vector2Int drawGizmosForIndex;
 
 	private void Start()
@@ -66,43 +67,64 @@ public class LevelController : MonoBehaviour
 		foreach (var tree in level.trees)
 		{
 			tree.isUnderRoot = true;
-			_rootedTiles.Enqueue(tree);
-			_rootedTilesList.Add(tree);
+		}
+	}
+	private void ClearTilesOnChangingToTheNextTree()
+	{
+		foreach (var tile in tiles)
+		{
+			tile.isUnderRoot = false;
+		}
+		_rootedTiles = new Queue<TileComponent>();
+		foreach (var tree in level.trees)
+		{
+			tree.isUnderRoot = true;
 		}
 	}
 	private void  ExpandRootTiles()
 	{
-		ReinitializeTiles();
-		while (_rootedTiles.Count != 0)
+		_isEndGame = true;
+		foreach (var tree in level.trees)
 		{
-			var rooted = _rootedTiles.Dequeue();
-			foreach (var neighbor in GetNeighbors(rooted.Pos))
+			ClearTilesOnChangingToTheNextTree();
+			_rootedTiles.Enqueue(tree);
+			_rootedTilesList.Add(tree);
+			while (_rootedTiles.Count != 0)
 			{
-				if (AreTilesConnected(rooted.Pos, neighbor))
+				var rooted = _rootedTiles.Dequeue();
+				foreach (var neighbor in GetNeighbors(rooted.Pos))
 				{
-					if (!tiles[VectorToIndex(neighbor)].isUnderRoot)
+					if (AreTilesConnected(rooted.Pos, neighbor))
 					{
-						_rootedTilesList.Add(tiles[VectorToIndex(neighbor)]);
-						_rootedTiles.Enqueue(tiles[VectorToIndex(neighbor)]);
-						tiles[VectorToIndex(neighbor)].isUnderRoot = true;
+						if (!tiles[VectorToIndex(neighbor)].isUnderRoot)
+						{
+							_rootedTilesList.Add(tiles[VectorToIndex(neighbor)]);
+							_rootedTiles.Enqueue(tiles[VectorToIndex(neighbor)]);
+							tiles[VectorToIndex(neighbor)].isUnderRoot = true;
+						}
 					}
 				}
-			}	
+			}
+			_isEndGame &= IsPondRooted();
 		}
 	}
 
-	private void CheckEndGame()
+	private bool IsPondRooted()
 	{
-		bool notReached = false;
+		bool flag = false;
 		foreach (var pond in level.ponds)
 		{
-			if (!pond.isUnderRoot)
+			if (pond.isUnderRoot)
 			{
-				notReached = true;
+				flag = true;
 			}
 		}
 
-		if (!notReached)
+		return flag;
+	}
+	private void CheckEndGame()
+	{
+		if (_isEndGame)
 		{
 			Debug.Log("End Game!");
 		}
