@@ -16,6 +16,9 @@ public class TileAsset : ScriptableObject
 	[SerializeField] private bool[] connectivity = new bool[4];
 	[SerializeField] private Sprite sprite;
 
+	[SerializeField] private bool isRoot;
+	[SerializeField] private bool isPond;
+
 	public GameObject InstantiateTile(TileComponent tilePrefab)
 	{
 		var tile = Instantiate(tilePrefab);
