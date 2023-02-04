@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LevelController : MonoBehaviour
@@ -8,8 +9,8 @@ public class LevelController : MonoBehaviour
 	private Camera mainCamera;
 	private LayerMask layerMask;
 	private List<TileComponent> tiles;
-	private List<TileComponent> _rootedTiles;
-
+	private Queue<TileComponent> _rootedTiles;
+	private List<TileComponent> _rootedTilesList;
 	[SerializeField] private Vector2Int drawGizmosForIndex;
 
 	private void Start()
@@ -17,12 +18,7 @@ public class LevelController : MonoBehaviour
 		mainCamera = Camera.main;
 		layerMask = LayerMask.GetMask($"Tiles");
 		tiles = level.InstantiateLevel(transform);
-		_rootedTiles = new List<TileComponent>();
-		foreach (var tree in level.trees)
-		{
-			tree.Tile.IsUnderRoot = true;
-			_rootedTiles.Add(tree);
-		}
+		ReinitializeTiles();
 	}
 
 	private void Update()
@@ -48,7 +44,7 @@ public class LevelController : MonoBehaviour
 	private IEnumerable<(TileComponent, TileComponent)> GetConnectedTiles()
 	{
 		GetNeighborsFromTrees();
-		foreach (var root in _rootedTiles)
+		foreach (var root in _rootedTilesList)
 		{
 			foreach (var neighbor in GetNeighbors(root.Pos))
 			{
@@ -64,28 +60,32 @@ public class LevelController : MonoBehaviour
 	{
 		foreach (var tile in tiles)
 		{
-			tile.Tile.IsUnderRoot = false;
+			tile.Tile.isUnderRoot = false;
 		}
-		_rootedTiles = new List<TileComponent>();
+		_rootedTiles = new Queue<TileComponent>();
+		_rootedTilesList = new List<TileComponent>();
 		foreach (var tree in level.trees)
 		{
-			tree.Tile.IsUnderRoot = true;
-			_rootedTiles.Add(tree);
+			tree.Tile.isUnderRoot = true;
+			_rootedTiles.Enqueue(tree);
+			_rootedTilesList.Add(tree);
 		}
 	}
 	private void  GetNeighborsFromTrees()
 	{
-		for (int i = 0; i < _rootedTiles.Count; i++)
+		ReinitializeTiles();
+		while (_rootedTiles.Count != 0)
 		{
-			var rooted = _rootedTiles[i];
+			var rooted = _rootedTiles.Dequeue();
 			foreach (var neighbor in GetNeighbors(rooted.Pos))
 			{
 				if (AreTilesConnected(rooted.Pos, neighbor))
 				{
-					if (!tiles[VectorToIndex(neighbor)].Tile.IsUnderRoot)
+					if (!tiles[VectorToIndex(neighbor)].Tile.isUnderRoot)
 					{
-						_rootedTiles.Add(tiles[VectorToIndex(neighbor)]);
-						tiles[VectorToIndex(neighbor)].Tile.IsUnderRoot = true;
+						_rootedTilesList.Add(tiles[VectorToIndex(neighbor)]);
+						_rootedTiles.Enqueue(tiles[VectorToIndex(neighbor)]);
+						tiles[VectorToIndex(neighbor)].Tile.isUnderRoot = true;
 					}
 				}
 			}	

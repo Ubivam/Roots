@@ -20,7 +20,7 @@ public class TileAsset : ScriptableObject
 	[SerializeField] public bool isTree;
 	[SerializeField] public bool isPond;
 
-	public bool IsUnderRoot { get;  set; }
+	public bool isUnderRoot;
 	public GameObject InstantiateTile(TileComponent tilePrefab)
 	{
 		var tile = Instantiate(tilePrefab);
