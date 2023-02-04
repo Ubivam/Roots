@@ -11,6 +11,8 @@ public class TileComponent : MonoBehaviour
     private bool isRotating;
     private Quaternion targetRotation = Quaternion.identity;
     private bool queuedRotation;
+    
+    public bool isUnderRoot;
 
     public TileAsset Tile { get; private set; }
     public int Y { get; private set; }

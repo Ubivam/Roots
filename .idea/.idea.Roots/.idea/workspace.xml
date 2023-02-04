@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8a9a0203-9f82-4dc4-85ad-96367daa0337" name="Changes" comment="Graph mechanics">
+    <list default="true" id="8a9a0203-9f82-4dc4-85ad-96367daa0337" name="Changes" comment="Upto date">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Roots/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Roots/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Level.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Level.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/LevelController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LevelController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/TileAsset.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TileAsset.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TileComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TileComponent.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,13 +20,17 @@
     <setting file="mock:///Users/Ubivam/Desktop/Roots/Assets/Resources/Tiles/Tree.asset" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/Ubivam/Desktop/Roots/Assets/Scenes/TestLevel.unity" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/Ubivam/Desktop/Roots/Assets/Scripts/Level.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/Ubivam/Desktop/Roots/Assets/Scripts/Level.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/Ubivam/Desktop/Roots/Assets/Scripts/Level.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/Ubivam/Desktop/Roots/Assets/Scripts/LevelController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LevelController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///Users/Ubivam/Desktop/Roots/Assets/Scripts/LevelController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/Ubivam/Desktop/Roots/Assets/Scripts/TileAsset.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/Ubivam/Desktop/Roots/Assets/Scripts/TileAsset.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TileComponent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///Users/Ubivam/Desktop/Roots/Assets/Sprites/Pond2.png.meta" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/Ubivam/Desktop/Roots/Assets/Sprites/Tree.png.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/Ubivam/Desktop/Roots/UserSettings/EditorUserSettings.asset" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1dc32e039a8c4e8ea9211f597ddfd8a6158e00/37/5959e830/Vector2Int.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/786eef7501d1499eb12aa84a953a6a7681b200/cd/59352d31/Handles.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -139,7 +143,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675543699433</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Upto date">
+      <created>1675548017392</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1675548017392</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -166,33 +177,34 @@
     <MESSAGE value="Root and Pond" />
     <MESSAGE value="Empty, bool checks" />
     <MESSAGE value="Graph mechanics" />
-    <option name="LAST_COMMIT_MESSAGE" value="Graph mechanics" />
+    <MESSAGE value="Upto date" />
+    <option name="LAST_COMMIT_MESSAGE" value="Upto date" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/LevelController.cs</url>
-          <line>75</line>
+          <line>74</line>
           <properties documentPath="$PROJECT_DIR$/Assets/Scripts/LevelController.cs" initialLine="75" containingFunctionPresentation="method 'GetNeighborsFromTrees'">
             <startOffsets>
-              <option value="1663" />
+              <option value="1617" />
             </startOffsets>
             <endOffsets>
-              <option value="1683" />
+              <option value="1637" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/LevelController.cs</url>
-          <line>85</line>
+          <line>84</line>
           <properties documentPath="$PROJECT_DIR$/Assets/Scripts/LevelController.cs" initialLine="85" containingFunctionPresentation="method 'GetNeighborsFromTrees'">
             <startOffsets>
-              <option value="1948" />
+              <option value="1897" />
             </startOffsets>
             <endOffsets>
-              <option value="2001" />
+              <option value="1950" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="19" />

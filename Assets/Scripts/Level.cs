@@ -47,7 +47,7 @@ public class Level : ScriptableObject
 			var tileComponent = tileGameObject.GetComponent<TileComponent>();
 			tileComponent.Init(x, y, cell.Tile);
 			tiles.Add(tileComponent);
-			tileComponent.Tile.isUnderRoot = false;
+			tileComponent.isUnderRoot = false;
 			if (tileComponent.Tile.isTree)
 			{
 				trees.Add(tileComponent);

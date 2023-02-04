@@ -37,13 +37,12 @@ public class LevelController : MonoBehaviour
 				var tile = hit.transform.parent.GetComponent<TileComponent>();
 				tile.Click();
 			}
-			ReinitializeTiles();
 		}
 	}
 
 	private IEnumerable<(TileComponent, TileComponent)> GetConnectedTiles()
 	{
-		GetNeighborsFromTrees();
+		ExpandRootTiles();
 		foreach (var root in _rootedTilesList)
 		{
 			foreach (var neighbor in GetNeighbors(root.Pos))
@@ -60,18 +59,18 @@ public class LevelController : MonoBehaviour
 	{
 		foreach (var tile in tiles)
 		{
-			tile.Tile.isUnderRoot = false;
+			tile.isUnderRoot = false;
 		}
 		_rootedTiles = new Queue<TileComponent>();
 		_rootedTilesList = new List<TileComponent>();
 		foreach (var tree in level.trees)
 		{
-			tree.Tile.isUnderRoot = true;
+			tree.isUnderRoot = true;
 			_rootedTiles.Enqueue(tree);
 			_rootedTilesList.Add(tree);
 		}
 	}
-	private void  GetNeighborsFromTrees()
+	private void  ExpandRootTiles()
 	{
 		ReinitializeTiles();
 		while (_rootedTiles.Count != 0)
@@ -81,17 +80,33 @@ public class LevelController : MonoBehaviour
 			{
 				if (AreTilesConnected(rooted.Pos, neighbor))
 				{
-					if (!tiles[VectorToIndex(neighbor)].Tile.isUnderRoot)
+					if (!tiles[VectorToIndex(neighbor)].isUnderRoot)
 					{
 						_rootedTilesList.Add(tiles[VectorToIndex(neighbor)]);
 						_rootedTiles.Enqueue(tiles[VectorToIndex(neighbor)]);
-						tiles[VectorToIndex(neighbor)].Tile.isUnderRoot = true;
+						tiles[VectorToIndex(neighbor)].isUnderRoot = true;
 					}
 				}
 			}	
 		}
 	}
-	
+
+	private void CheckEndGame()
+	{
+		bool notReached = false;
+		foreach (var pond in level.ponds)
+		{
+			if (!pond.isUnderRoot)
+			{
+				notReached = true;
+			}
+		}
+
+		if (!notReached)
+		{
+			Debug.Log("End Game!");
+		}
+	}
 
 	private IEnumerable<Vector2Int> GetNeighbors(Vector2Int pos)
 	{
@@ -172,6 +187,7 @@ public class LevelController : MonoBehaviour
 			var offset = new Vector3(0, 0.1f, 0);
 			Gizmos.DrawLine(t0.transform.position + offset, t1.transform.position + offset);
 		}
+		CheckEndGame();
 	}
 
 	private TileComponent GetTile(Vector2Int pos)
