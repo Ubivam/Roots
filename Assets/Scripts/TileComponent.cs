@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class TileComponent : MonoBehaviour
 {
@@ -9,7 +11,19 @@ public class TileComponent : MonoBehaviour
     private bool isRotating;
     private Quaternion targetRotation = Quaternion.identity;
     private bool queuedRotation;
-    public Tile tile;
+
+    public TileAsset Tile { get; private set; }
+    public int Y { get; private set; }
+    public int X { get; private set; }
+
+    public Vector2Int Pos => new(X, Y);
+
+    public void Init(int x, int y, TileAsset tile)
+    {
+        X = x;
+        Y = y;
+        Tile = tile;
+    }
 
     public void Click()
     {
@@ -50,8 +64,34 @@ public class TileComponent : MonoBehaviour
         }
     }
 
-    public bool GetConnectivity(Tile.Side side)
+    public bool GetConnectivity(TileAsset.Side side)
     {
-        return tile.GetConnectivity(side, transform.localRotation.eulerAngles.y);
+        return Tile.GetConnectivity(side, transform.localRotation.eulerAngles.y);
     }
+
+#if UNITY_EDITOR
+
+    private static GUIStyle debugStyle;
+    
+    private void OnGUI()
+    {
+        debugStyle = new GUIStyle
+        {
+            normal = new GUIStyleState
+            {
+                textColor = Color.yellow
+            }
+        };
+        
+        Vector3 point = Camera.main.WorldToScreenPoint(transform.position);
+        var rect = new Rect
+        {
+            x = point.x,
+            y = Screen.height - point.y,
+            height = 50,
+            width = 300
+        };
+        GUI.Label(rect, name, debugStyle); // display its name, or other string
+    }
+#endif
 }

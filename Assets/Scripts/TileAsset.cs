@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Game/Tile"), Serializable]
-public class Tile : ScriptableObject
+public class TileAsset : ScriptableObject
 {
 	public enum Side
 	{
@@ -30,11 +30,14 @@ public class Tile : ScriptableObject
 		var startIndex = angle switch
 		{
 			0 => 0,
-			90 => 1,
+			90 => 3,
 			180 => 2,
-			270 => 3,
-			_ => 0
+			270 => 1,
+			_ => -1
 		};
+
+		if (startIndex == -1)
+			return false;
 
 		var index = (startIndex + (int)side + connectivity.Length) % connectivity.Length;
 

@@ -9,13 +9,13 @@ public class Level : ScriptableObject
 	public List<LevelCell> Tiles;
 	public int SideLength;
 	public TileComponent TilePrefab;
-
 	public TileGridChecker TileGridChecker;
 
-	public GameObject InstantiateLevel()
-	{
-		var gameObject = new GameObject($"Level {name}");
+	public int Width => SideLength;
+	public int Height => Tiles.Count / Width;
 
+	public List<TileComponent> InstantiateLevel(Transform parent)
+	{
 		var width = SideLength;
 		var height = Tiles.Count / SideLength;
 
@@ -24,34 +24,37 @@ public class Level : ScriptableObject
 		if (width * height != Tiles.Count)
 		{
 			Debug.LogError("Wrong dimensions");
-			return gameObject;
+			return new List<TileComponent>();
 		}
+
+		var tiles = new List<TileComponent>();
 		
 		for (int index = 0; index < Tiles.Count; index++)
 		{
 			var cell = Tiles[index];
-			var row = index % width;
-			var column = index / width;
+			var x = index % width;
+			var y = index / width;
 			
-			var tile = cell.Tile.InstantiateTile(TilePrefab);
-			tile.name += $" [{column}, {row}]";
-			tile.transform.parent = gameObject.transform;
-			var deltaPosition = new Vector3(row - height / 2f + 0.5f, 0.05f, column - width / 2f + 0.5f);
-			deltaPosition.x *= tile.transform.lossyScale.x;
-			deltaPosition.z *= tile.transform.lossyScale.z;
-			tile.transform.localPosition = deltaPosition;  
-			tile.transform.localEulerAngles = new Vector3(0, cell.Rotation, 0);
-			TileGridChecker.grid[column,row] = tile.GetComponent<TileComponent>();
-			TileGridChecker.grid[column, row].tile = cell.Tile;
+			var tileGameObject = cell.Tile.InstantiateTile(TilePrefab);
+			tileGameObject.name = $"[{x}, {y}]";
+			tileGameObject.transform.parent = parent;
+			var deltaPosition = new Vector3(x - height / 2f + 0.5f, 0.05f, y - width / 2f + 0.5f);
+			deltaPosition.x *= tileGameObject.transform.lossyScale.x;
+			deltaPosition.z *= tileGameObject.transform.lossyScale.z;
+			tileGameObject.transform.localPosition = deltaPosition;  
+			tileGameObject.transform.localEulerAngles = new Vector3(0, cell.Rotation, 0);
+			var tileComponent = tileGameObject.GetComponent<TileComponent>();
+			tileComponent.Init(x, y, cell.Tile);
+			tiles.Add(tileComponent);
 		}
-		
-		return gameObject;
+
+		return tiles;
 	}
 }
 
 [Serializable]
 public class LevelCell
 {
-	public Tile Tile;
+	public TileAsset Tile;
 	public float Rotation;
 }
