@@ -16,6 +16,14 @@ public class Tile : ScriptableObject
 	[SerializeField] private bool[] connectivity = new bool[4];
 	[SerializeField] private Sprite sprite;
 
+	public GameObject InstantiateTile()
+	{
+		var gameObject = new GameObject("Tile");
+		var spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
+		spriteRenderer.sprite = sprite;
+		return gameObject;
+	}
+	
 	public bool GetConnectivity(Side side, float orientation)
 	{
 		var angle = (orientation + 360f) % 360f;
