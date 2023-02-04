@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connectivity: 00000001
   sprite: {fileID: 21300000, guid: 626726ad51d0440d19076185dabe5f51, type: 3}
-  isRoot: 1
+  isTree: 1
   isPond: 0

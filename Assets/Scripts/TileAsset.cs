@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(menuName = "Game/Tile"), Serializable]
 public class TileAsset : ScriptableObject
@@ -16,9 +17,10 @@ public class TileAsset : ScriptableObject
 	[SerializeField] private bool[] connectivity = new bool[4];
 	[SerializeField] private Sprite sprite;
 
-	[SerializeField] private bool isRoot;
-	[SerializeField] private bool isPond;
+	[SerializeField] public bool isTree;
+	[SerializeField] public bool isPond;
 
+	public bool IsUnderRoot { get;  set; }
 	public GameObject InstantiateTile(TileComponent tilePrefab)
 	{
 		var tile = Instantiate(tilePrefab);

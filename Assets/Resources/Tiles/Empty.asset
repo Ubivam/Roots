@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc8317d845d616418fda0d1b3817cf3, type: 3}
   m_Name: Empty
   m_EditorClassIdentifier: 
-  connectivity: 00010001
-  sprite: {fileID: 21300000, guid: 2a9d213aa4ed445ce916a6cfe554bb4c, type: 3}
+  connectivity: 00000000
+  sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  isTree: 0
+  isPond: 0

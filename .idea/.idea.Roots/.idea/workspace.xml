@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8a9a0203-9f82-4dc4-85ad-96367daa0337" name="Changes" comment="Root and Pond">
+    <list default="true" id="8a9a0203-9f82-4dc4-85ad-96367daa0337" name="Changes" comment="Empty, bool checks">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Roots/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Roots/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Levels/TestLevel.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Levels/TestLevel.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Tiles/Empty.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Tiles/Empty.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Tiles/Pond.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Tiles/Pond.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Tiles/Tree.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Tiles/Tree.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestLevel.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TestLevel.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Level.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Level.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LevelController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LevelController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/TileAsset.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TileAsset.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Pond2.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Pond2.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Tree.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Tree.png.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,6 +22,8 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LevelController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TileComponent.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1dc32e039a8c4e8ea9211f597ddfd8a6158e00/37/5959e830/Vector2Int.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/786eef7501d1499eb12aa84a953a6a7681b200/cd/59352d31/Handles.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -74,10 +85,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="3759">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="3759" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -109,7 +120,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675535306719</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Empty, bool checks">
+      <created>1675535495694</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1675535495694</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -134,17 +152,24 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Tiles update" />
     <MESSAGE value="Root and Pond" />
-    <option name="LAST_COMMIT_MESSAGE" value="Root and Pond" />
+    <MESSAGE value="Empty, bool checks" />
+    <option name="LAST_COMMIT_MESSAGE" value="Empty, bool checks" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <condition expression="i == 6" language="C#" />
           <url>file://$PROJECT_DIR$/Assets/Scripts/LevelController.cs</url>
-          <line>51</line>
-          <properties documentPath="C:\Git\Personal\Roots\Assets\Scripts\LevelController.cs" initialLine="48" containingFunctionPresentation="method 'GetConnectedTiles'" />
-          <option name="timeStamp" value="8" />
+          <line>49</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/LevelController.cs" initialLine="49" containingFunctionPresentation="method 'GetConnectedTiles'">
+            <startOffsets>
+              <option value="1077" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1101" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -8,6 +8,7 @@ public class LevelController : MonoBehaviour
 	private Camera mainCamera;
 	private LayerMask layerMask;
 	private List<TileComponent> tiles;
+	private List<TileComponent> _rootedTiles;
 
 	[SerializeField] private Vector2Int drawGizmosForIndex;
 
@@ -16,6 +17,12 @@ public class LevelController : MonoBehaviour
 		mainCamera = Camera.main;
 		layerMask = LayerMask.GetMask($"Tiles");
 		tiles = level.InstantiateLevel(transform);
+		_rootedTiles = new List<TileComponent>();
+		foreach (var tree in level.trees)
+		{
+			tree.Tile.IsUnderRoot = true;
+			_rootedTiles.Add(tree);
+		}
 	}
 
 	private void Update()
@@ -34,27 +41,57 @@ public class LevelController : MonoBehaviour
 				var tile = hit.transform.parent.GetComponent<TileComponent>();
 				tile.Click();
 			}
+			ReinitializeTiles();
 		}
 	}
 
 	private IEnumerable<(TileComponent, TileComponent)> GetConnectedTiles()
 	{
-		for (int i = 0; i < tiles.Count; i++)
+		GetNeighborsFromTrees();
+		foreach (var root in _rootedTiles)
 		{
-			var pos = IndexToVector(i);
-			
-			// if (pos != drawGizmosForIndex)
-			// 	continue;
-
-			foreach (var neighbor in GetNeighbors(pos))
+			foreach (var neighbor in GetNeighbors(root.Pos))
 			{
-				if (AreTilesConnected(pos, neighbor))
+				if (AreTilesConnected(root.Pos, neighbor))
 				{
-					yield return (tiles[i], tiles[VectorToIndex(neighbor)]);
+					yield return (root, tiles[VectorToIndex(neighbor)]);
 				}
 			}
 		}
 	}
+
+	private void ReinitializeTiles()
+	{
+		foreach (var tile in tiles)
+		{
+			tile.Tile.IsUnderRoot = false;
+		}
+		_rootedTiles = new List<TileComponent>();
+		foreach (var tree in level.trees)
+		{
+			tree.Tile.IsUnderRoot = true;
+			_rootedTiles.Add(tree);
+		}
+	}
+	private void  GetNeighborsFromTrees()
+	{
+		for (int i = 0; i < _rootedTiles.Count; i++)
+		{
+			var rooted = _rootedTiles[i];
+			foreach (var neighbor in GetNeighbors(rooted.Pos))
+			{
+				if (AreTilesConnected(rooted.Pos, neighbor))
+				{
+					if (!tiles[VectorToIndex(neighbor)].Tile.IsUnderRoot)
+					{
+						_rootedTiles.Add(tiles[VectorToIndex(neighbor)]);
+						tiles[VectorToIndex(neighbor)].Tile.IsUnderRoot = true;
+					}
+				}
+			}	
+		}
+	}
+	
 
 	private IEnumerable<Vector2Int> GetNeighbors(Vector2Int pos)
 	{

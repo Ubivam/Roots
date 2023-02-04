@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(menuName = "Game/Level")]
 public class Level : ScriptableObject
@@ -10,6 +11,9 @@ public class Level : ScriptableObject
 	public int SideLength;
 	public TileComponent TilePrefab;
 	public TileGridChecker TileGridChecker;
+	
+	public List<TileComponent> trees;
+	public List<TileComponent> ponds;
 
 	public int Width => SideLength;
 	public int Height => Tiles.Count / Width;
@@ -28,6 +32,8 @@ public class Level : ScriptableObject
 		}
 
 		var tiles = new List<TileComponent>();
+		trees = new List<TileComponent>();
+		ponds = new List<TileComponent>();
 		
 		for (int index = 0; index < Tiles.Count; index++)
 		{
@@ -46,6 +52,16 @@ public class Level : ScriptableObject
 			var tileComponent = tileGameObject.GetComponent<TileComponent>();
 			tileComponent.Init(x, y, cell.Tile);
 			tiles.Add(tileComponent);
+			tileComponent.Tile.IsUnderRoot = false;
+			if (tileComponent.Tile.isTree)
+			{
+				trees.Add(tileComponent);
+			}
+
+			if (tileComponent.Tile.isPond)
+			{
+				ponds.Add(tileComponent);
+			}
 		}
 
 		return tiles;
