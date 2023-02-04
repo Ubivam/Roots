@@ -9,8 +9,8 @@ public class Level : ScriptableObject
 	public int SideLength;
 	public TileComponent TilePrefab;
 	
-	public List<TileComponent> trees;
-	public List<TileComponent> ponds;
+	[HideInInspector] public List<TileComponent> trees;
+	[HideInInspector] public List<TileComponent> ponds;
 
 	public int Width => SideLength;
 	public int Height => Tiles.Count / Width;

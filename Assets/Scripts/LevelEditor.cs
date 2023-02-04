@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class LevelEditor : MonoBehaviour
 {
 	private const int MAX_GRID_SIZE = 8;
+	private const int DEFAULT_ASSET_ID = 0; // Straight is default
 
 	[SerializeField] private GameObject tileButtonPrefab;
 
@@ -76,8 +77,6 @@ public class LevelEditor : MonoBehaviour
 			Destroy(child.gameObject);
 		}
 
-		int defaultAssetId = 0; // Straight is default
-
 		// Generate level
 		gridLayout = GetComponent<GridLayoutGroup>();
 		level = ScriptableObject.CreateInstance<Level>();
@@ -88,7 +87,7 @@ public class LevelEditor : MonoBehaviour
 		for (int i = 0; i < gridSize * gridSize; ++i)
 		{
 			var levelCell = new LevelCell();
-			levelCell.Tile = tiles.assets[defaultAssetId];
+			levelCell.Tile = tiles.assets[DEFAULT_ASSET_ID];
 			levelCell.Rotation = 0f;
 			level.Tiles.Add(levelCell);
 		}
@@ -114,7 +113,7 @@ public class LevelEditor : MonoBehaviour
 				int buttonColumn = j;
 				button.onClick.AddListener(() => OnButtonClick(buttonRow, buttonColumn));
 
-				button.image.sprite = tiles.assets[defaultAssetId].sprite;
+				button.image.sprite = tiles.assets[DEFAULT_ASSET_ID].sprite;
 
 				tileButtons[i, j] = button;
 			}
@@ -166,7 +165,16 @@ public class LevelEditor : MonoBehaviour
 		ResetTileDropdown();
 
 		var uniqueFileName = AssetDatabase.GenerateUniqueAssetPath("Assets/Resources/Levels/" + levelNameInput.text + ".asset");
+		Debug.Log(uniqueFileName);
+
 		AssetDatabase.CreateAsset(level, uniqueFileName);
+
+		// Create another level
+		var oldLevel = level;
+		level = ScriptableObject.CreateInstance<Level>();
+		level.Tiles = oldLevel.Tiles;
+		level.SideLength = oldLevel.SideLength;
+		level.TilePrefab = oldLevel.TilePrefab;
 	}
 
 	private void OnTileRotate()
