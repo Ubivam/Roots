@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [CreateAssetMenu(menuName = "Game/Level")]
 public class Level : ScriptableObject
@@ -10,7 +8,6 @@ public class Level : ScriptableObject
 	public List<LevelCell> Tiles;
 	public int SideLength;
 	public TileComponent TilePrefab;
-	public TileGridChecker TileGridChecker;
 	
 	public List<TileComponent> trees;
 	public List<TileComponent> ponds;
@@ -23,8 +20,6 @@ public class Level : ScriptableObject
 		var width = SideLength;
 		var height = Tiles.Count / SideLength;
 
-		TileGridChecker.grid = new TileComponent[width, height];
-		
 		if (width * height != Tiles.Count)
 		{
 			Debug.LogError("Wrong dimensions");

@@ -200,11 +200,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 389568213}
-<<<<<<< Updated upstream
   m_LocalRotation: {x: 0.6021955, y: -0.0000000137366865, z: 0.000000010361601, w: 0.79834867}
-=======
-  m_LocalRotation: {x: 0.6021955, y: -0.000000015358088, z: 0.0000000115846275, w: 0.79834867}
->>>>>>> Stashed changes
   m_LocalPosition: {x: 0, y: 7, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -304,11 +300,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 982877391}
-<<<<<<< Updated upstream
   m_LocalRotation: {x: 0.6021955, y: -0.0000000137366865, z: 0.000000010361601, w: 0.79834867}
-=======
-  m_LocalRotation: {x: 0.6021955, y: -0.000000015358088, z: 0.0000000115846275, w: 0.79834867}
->>>>>>> Stashed changes
   m_LocalPosition: {x: 0, y: 7, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -384,11 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00373ef9df8da954bbfb523036047b95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
   level: {fileID: 11400000, guid: 14241e771f95cb34c80be8be472ad96c, type: 2}
-=======
-  level: {fileID: 11400000, guid: de2e9d69bcfdc354082e3354211a2573, type: 2}
->>>>>>> Stashed changes
   drawGizmosForIndex: {x: 0, y: 0}
 --- !u!4 &1516623018
 Transform:
