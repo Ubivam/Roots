@@ -87,3 +87,4 @@ MonoBehaviour:
     Rotation: 0
   SideLength: 6
   TilePrefab: {fileID: 452177637, guid: a3dfc42455085cd4992684c2ef7b7316, type: 3}
+  TileGridChecker: {fileID: -801304370906646729, guid: 7fbaef14174c34dc0b67b54758abe2c7, type: 3}

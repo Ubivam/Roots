@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Game/Level")]
@@ -9,6 +10,8 @@ public class Level : ScriptableObject
 	public int SideLength;
 	public TileComponent TilePrefab;
 
+	public TileGridChecker TileGridChecker;
+
 	public GameObject InstantiateLevel()
 	{
 		var gameObject = new GameObject($"Level {name}");
@@ -16,6 +19,8 @@ public class Level : ScriptableObject
 		var width = SideLength;
 		var height = Tiles.Count / SideLength;
 
+		TileGridChecker.grid = new TileComponent[width, height];
+		
 		if (width * height != Tiles.Count)
 		{
 			Debug.LogError("Wrong dimensions");
@@ -36,8 +41,10 @@ public class Level : ScriptableObject
 			deltaPosition.z *= tile.transform.lossyScale.z;
 			tile.transform.localPosition = deltaPosition;  
 			tile.transform.localEulerAngles = new Vector3(0, cell.Rotation, 0);
+			TileGridChecker.grid[column,row] = tile.GetComponent<TileComponent>();
+			TileGridChecker.grid[column, row].tile = cell.Tile;
 		}
-
+		
 		return gameObject;
 	}
 }

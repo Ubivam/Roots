@@ -9,6 +9,7 @@ public class TileComponent : MonoBehaviour
     private bool isRotating;
     private Quaternion targetRotation = Quaternion.identity;
     private bool queuedRotation;
+    public Tile tile;
 
     public void Click()
     {
@@ -47,5 +48,10 @@ public class TileComponent : MonoBehaviour
             targetRotation *= Quaternion.Euler(0, rotationAngle, 0);
             StartCoroutine(Rotate());
         }
+    }
+
+    public bool GetConnectivity(Tile.Side side)
+    {
+        return tile.GetConnectivity(side, transform.localRotation.eulerAngles.y);
     }
 }

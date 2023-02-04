@@ -26,6 +26,7 @@ public class LevelController : MonoBehaviour
 				var tile = hit.transform.parent.GetComponent<TileComponent>();
 				tile.Click();
 			}
+			level.TileGridChecker.LogConnectedTiles();
 		}
 	}
 }
