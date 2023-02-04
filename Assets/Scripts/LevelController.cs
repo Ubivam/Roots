@@ -208,6 +208,9 @@ public class LevelController : MonoBehaviour
 			Gizmos.color = Color.red;
 			var offset = new Vector3(0, 0.1f, 0);
 			Gizmos.DrawLine(t0.transform.position + offset, t1.transform.position + offset);
+			t0.gameObject.transform.GetChild(0).transform.gameObject.SetActive(true);
+			t1.gameObject.transform.GetChild(0).transform.gameObject.SetActive(true);
+			
 		}
 		CheckEndGame();
 	}

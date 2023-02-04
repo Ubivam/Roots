@@ -16,7 +16,7 @@ public class TileAsset : ScriptableObject
 	// Represents connectivity for each side of a tile. Indexed with Side. Layout: [Up, Right, Down, Left]
 	[SerializeField] private bool[] connectivity = new bool[4];
 	[SerializeField] public Sprite sprite;
-
+	[SerializeField] public Sprite root;
 	[SerializeField] public bool isTree;
 	[SerializeField] public bool isPond;
 
@@ -24,7 +24,11 @@ public class TileAsset : ScriptableObject
 	public GameObject InstantiateTile(TileComponent tilePrefab)
 	{
 		var tile = Instantiate(tilePrefab);
-		tile.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+	//	tile.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+		tile.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = root;
+		tile.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 1;
+		tile.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = sprite;
+		tile.gameObject.transform.GetChild(0).gameObject.SetActive(false);
 		return tile.gameObject;
 	}
 	

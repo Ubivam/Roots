@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8a9a0203-9f82-4dc4-85ad-96367daa0337" name="Changes" comment="End game check">
+    <list default="true" id="8a9a0203-9f82-4dc4-85ad-96367daa0337" name="Changes" comment="End game logic revised">
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Materials.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Materials/Root Straight.mat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Materials/Root Straight.mat.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Root Junction.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Root Junction.png.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Roots/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Roots/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Tile.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Levels/Strajo Level.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Levels/Strajo Level.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/LevelController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LevelController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TileAsset.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TileAsset.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Root Joint.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Root Joint.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Root Straight.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Root Straight.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +32,7 @@
     <setting file="mock:///Users/Ubivam/Desktop/Roots/Assets/Scripts/Level.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/Ubivam/Desktop/Roots/Assets/Scripts/LevelController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LevelController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Users/Ubivam/Desktop/Roots/Assets/Scripts/LevelController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/Ubivam/Desktop/Roots/Assets/Scripts/LevelController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/Ubivam/Desktop/Roots/Assets/Scripts/TileAsset.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/Ubivam/Desktop/Roots/Assets/Scripts/TileAsset.cs" root0="SKIP_HIGHLIGHTING" />
@@ -156,7 +168,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675549021234</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="End game logic revised">
+      <created>1675551437434</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1675551437434</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -185,39 +204,10 @@
     <MESSAGE value="Graph mechanics" />
     <MESSAGE value="Upto date" />
     <MESSAGE value="End game check" />
-    <option name="LAST_COMMIT_MESSAGE" value="End game check" />
+    <MESSAGE value="End game logic revised" />
+    <option name="LAST_COMMIT_MESSAGE" value="End game logic revised" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/LevelController.cs</url>
-          <line>85</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/LevelController.cs" initialLine="73" containingFunctionPresentation="method 'ExpandRootTiles'">
-            <startOffsets>
-              <option value="1807" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1825" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/LevelController.cs</url>
-          <line>86</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/LevelController.cs" initialLine="74" containingFunctionPresentation="method 'ExpandRootTiles'">
-            <startOffsets>
-              <option value="1828" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1861" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="Frame#LevelController.GetNeighborsFromTrees" memberName="this" />
