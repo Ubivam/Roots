@@ -5,72 +5,140 @@ using TMPro;
 
 public class LevelEditor : MonoBehaviour
 {
-	[SerializeField] private int gridSize = 3;
-	[SerializeField] private string levelName = "Rename me plz";
-	[SerializeField] private float padding = 5f;
+	private const int MAX_GRID_SIZE = 8;
 
-	public GameObject buttonPrefab;
-	public TMP_Dropdown dropdown;
+	[SerializeField] private GameObject tileButtonPrefab;
 
-	private GridLayoutGroup gridLayouGroup;
-	private Button[,] buttons;
+	[SerializeField] private TMP_Dropdown tileDropdownMenu;
+	[SerializeField] private TMP_InputField levelNameInput;
+	[SerializeField] private TMP_InputField gridSizeInput;
+
+	[SerializeField] private Button saveButton;
+	[SerializeField] private Button rotateButton;
+
+	private GridLayoutGroup gridLayout;
+	private Button[,] tileButtons;
 	private Level level;
+	private Button selectedTileButton;
 
-	void Start()
+	private void Start()
 	{
-		gridLayouGroup = GetComponent<GridLayoutGroup>();
+		saveButton.onClick.AddListener(() => OnLevelSave());
+		rotateButton.onClick.AddListener(() => OnTileRotate());
+	}
+
+	private void Update()
+	{
+		int gridSize = 0;
+
+		// Detect change in grid size
+		if (tileButtons == null ||
+			(int.TryParse(gridSizeInput.text, out gridSize) &&
+			gridSize > 0 && gridSize <= MAX_GRID_SIZE &&
+			tileButtons.GetLength(0) != gridSize))
+		{
+			tileButtons = new Button[gridSize, gridSize];
+		}
+		else
+		{
+			return;
+		}
+
+		ResetTileDropdown();
+
+		// Cleanup
+		selectedTileButton = null;
+
+		foreach (Transform child in transform)
+		{
+			Destroy(child.gameObject);
+		}
+
+		// Generate level
+		gridLayout = GetComponent<GridLayoutGroup>();
 		level = ScriptableObject.CreateInstance<Level>();
 
-		gridLayouGroup.constraintCount = gridSize;
-		gridLayouGroup.cellSize = new Vector2(Screen.width / (float)gridSize, Screen.height / (float)gridSize - padding);
+		// Update grid size
+		gridLayout.constraintCount = gridSize;
+
+		Vector2 cellSize = new Vector2(Screen.width / (float)gridSize, Screen.height / (float)gridSize);
+		float minCellSide = Mathf.Min(cellSize.x, cellSize.y);
+		gridLayout.cellSize = new Vector2(minCellSide, minCellSide);
 
 		// Generate grid of buttons
-		buttons = new Button[gridSize, gridSize];
 		for (int i = 0; i < gridSize; i++)
 		{
 			for (int j = 0; j < gridSize; j++)
 			{
-				GameObject buttonObject = Instantiate(buttonPrefab);
+				GameObject buttonObject = Instantiate(tileButtonPrefab);
 				buttonObject.transform.SetParent(transform);
 
 				Button button = buttonObject.GetComponent<Button>();
 
-				int x = i;
-				int y = j;
-				button.onClick.AddListener(() => OnButtonClick(x, y));
-				buttons[i, j] = button;
+				int buttonRow = i;
+				int buttonColumn = j;
+				button.onClick.AddListener(() => OnButtonClick(buttonRow, buttonColumn));
+
+				tileButtons[i, j] = button;
 			}
 		}
 	}
 
-	void OnButtonClick(int x, int y)
+	void OnButtonClick(int buttonRow, int buttonColumn)
 	{
-		Button button = buttons[x, y];
+		ResetTileDropdown();
+
+		Button tileButton = tileButtons[buttonRow, buttonColumn];
+
+		// Update selected button
+		if (selectedTileButton)
+		{
+			selectedTileButton.GetComponent<Image>().color = Color.white;
+		}
+
+		selectedTileButton = tileButton;
+		selectedTileButton.GetComponent<Image>().color = Color.red;
 
 		// Show dropdown list
-		dropdown.gameObject.SetActive(true);
-
-		dropdown.onValueChanged.AddListener(delegate {
-			OnDropdownSelect(button);
+		tileDropdownMenu.gameObject.SetActive(true);
+		tileDropdownMenu.onValueChanged.AddListener(delegate {
+			OnDropdownSelect(tileButton);
 		});
 
 		// Set position of dropdown list
-		RectTransform dropdownRect = dropdown.GetComponent<RectTransform>();
-		Vector2 buttonPos = button.GetComponent<RectTransform>().anchoredPosition;
+		RectTransform dropdownRect = tileDropdownMenu.GetComponent<RectTransform>();
+		Vector2 buttonPos = tileButton.GetComponent<RectTransform>().anchoredPosition;
 		dropdownRect.anchoredPosition = buttonPos;
 	}
 
 	void OnDropdownSelect(Button button)
 	{
-		button.image.sprite = dropdown.options[dropdown.value].image;
+		button.image.sprite = tileDropdownMenu.options[tileDropdownMenu.value].image;
 
-		// Hide dropdown list
-		dropdown.onValueChanged.RemoveAllListeners();
-		dropdown.gameObject.SetActive(false);
+		ResetTileDropdown();
 	}
 
-	private void OnDestroy()
+	private void OnLevelSave()
 	{
-		AssetDatabase.CreateAsset(level, "Assets/Resources/Levels/" + levelName + ".asset");
+		var uniqueFileName = AssetDatabase.GenerateUniqueAssetPath("Assets/Resources/Levels/" + levelNameInput.text + ".asset");
+		AssetDatabase.CreateAsset(level, uniqueFileName);
+	}
+
+	private void OnTileRotate()
+	{
+		if (!selectedTileButton)
+		{
+			return;
+		}
+
+		var rect = selectedTileButton.transform;
+		rect.Rotate(new Vector3(0f, 0f, -90f));
+	}
+
+	private void ResetTileDropdown()
+	{
+		tileDropdownMenu.value = 5; // Empty tile by default
+		tileDropdownMenu.onValueChanged.RemoveAllListeners();
+		tileDropdownMenu.gameObject.SetActive(false);
 	}
 }
