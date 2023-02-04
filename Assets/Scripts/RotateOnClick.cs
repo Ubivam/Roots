@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class RotatingTile : Tile
+public class RotateOnClick : MonoBehaviour
 {
 	[SerializeField] private float rotationAngle = -90f; // degrees
 	[SerializeField] private float rotationTime = 0.5f; // seconds
@@ -11,13 +11,13 @@ public class RotatingTile : Tile
 	private Quaternion targetRotation;
 	private bool queuedRotation;
 
-	virtual protected void Start()
+	private void Start()
 	{
 		mainCamera = FindObjectOfType<Camera>();
 		targetRotation = Quaternion.identity;
 	}
 
-	virtual protected void Update()
+	private void Update()
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
