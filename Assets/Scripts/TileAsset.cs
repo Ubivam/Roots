@@ -15,7 +15,7 @@ public class TileAsset : ScriptableObject
 
 	// Represents connectivity for each side of a tile. Indexed with Side. Layout: [Up, Right, Down, Left]
 	[SerializeField] private bool[] connectivity = new bool[4];
-	[SerializeField] private Sprite sprite;
+	[SerializeField] public Sprite sprite;
 
 	[SerializeField] public bool isTree;
 	[SerializeField] public bool isPond;
