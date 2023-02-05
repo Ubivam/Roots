@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class LevelController : MonoBehaviour
 	[SerializeField] private LevelInput levelInput;
 	[SerializeField] private MainMenu _mainMenu;
 	[SerializeField] private TextMeshProUGUI _textMeshPro;
+	[SerializeField] private AnimationCurve _cameraMoveCurve;
 	[FormerlySerializedAs("level")] [SerializeField] private Level backupLevel;
 	private Level Level => levelInput.Level != null ? levelInput.Level : backupLevel;
 	
@@ -18,6 +20,8 @@ public class LevelController : MonoBehaviour
 	private List<TileComponent> _rootedTilesList;
 	private bool _isEndGame;
 	private AudioSource _audioSource;
+
+	private float cameraGoalXPos;
 
 	private string PlayerPrefsKey => $"{_mainMenu.GetAllLevels().name}_LastFinishedIndex";
 	private void Start()
@@ -30,10 +34,19 @@ public class LevelController : MonoBehaviour
 
 		tiles = Level.InstantiateLevel(transform);
 		ReinitializeTiles();
+
+		cameraGoalXPos = 6.0f;
 	}
 
 	private void Update()
 	{
+		var camPos = mainCamera.transform.position;
+
+		if (cameraGoalXPos > 7f)
+			mainCamera.transform.position = new Vector3(Mathf.Lerp(camPos.x, cameraGoalXPos, Time.deltaTime * 5f), camPos.y, camPos.z);
+		else
+			mainCamera.transform.position = new Vector3(Mathf.Lerp(cameraGoalXPos, camPos.x, Time.deltaTime * 5f), camPos.y, camPos.z);
+
 		HandleClick();
 		
 		if (tiles == null)
@@ -68,6 +81,11 @@ public class LevelController : MonoBehaviour
 
 	private void HandleClick()
 	{
+		if (_isEndGame)
+		{
+			return;
+		}
+
 		if (Input.GetMouseButtonDown(0))
 		{
 			var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -171,16 +189,25 @@ public class LevelController : MonoBehaviour
 	{
 		if (_isEndGame)
 		{
-			var lastFinishedIndex = PlayerPrefs.GetInt(PlayerPrefsKey, -1);
-			lastFinishedIndex++;
-			PlayerPrefs.SetInt(PlayerPrefsKey, lastFinishedIndex);
-			_mainMenu.OnPlayClicked();
-
 			_audioSource.enabled = true;
 			_audioSource.Play();
 			Debug.Log("End Game!");
-			_textMeshPro.SetText("Level " + (PlayerPrefs.GetInt(PlayerPrefsKey, -1) + 1));
+			cameraGoalXPos = 20f;
+
+			StartCoroutine(NextLevel(2.0f));
 		}
+	}
+
+	IEnumerator NextLevel(float time)
+	{
+		yield return new WaitForSeconds(time);
+
+		var lastFinishedIndex = PlayerPrefs.GetInt(PlayerPrefsKey, -1);
+		lastFinishedIndex++;
+		PlayerPrefs.SetInt(PlayerPrefsKey, lastFinishedIndex);
+		_mainMenu.OnPlayClicked();
+
+		_textMeshPro.SetText("Level " + (PlayerPrefs.GetInt(PlayerPrefsKey, -1) + 1));
 	}
 
 	private IEnumerable<Vector2Int> GetNeighbors(Vector2Int pos)

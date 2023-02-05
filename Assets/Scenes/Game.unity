@@ -202,7 +202,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 389568213}
   m_LocalRotation: {x: 0.35355338, y: -0.35355338, z: 0.1464466, w: 0.8535535}
-  m_LocalPosition: {x: 6, y: 9, z: -6}
+  m_LocalPosition: {x: -15, y: 9, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -728,6 +728,12 @@ MonoBehaviour:
   levelInput: {fileID: 11400000, guid: c9f24d11d14b79a499d24bdf8ca38726, type: 2}
   _mainMenu: {fileID: 6579412909817268635, guid: 92cf19616dd6946c2be7c360a7ba748d, type: 3}
   _textMeshPro: {fileID: 1047542069}
+  _cameraMoveCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   backupLevel: {fileID: 11400000, guid: 28dd10ae0b156714b8eec8e87febd18c, type: 2}
 --- !u!4 &1516623018
 Transform:
@@ -754,7 +760,7 @@ AudioSource:
   m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 43bd5e9df1ef1034f91c7487e47856a1, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ba399c3f7a551b748b7ab8b133952dc4, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
