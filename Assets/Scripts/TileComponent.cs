@@ -13,6 +13,7 @@ public class TileComponent : MonoBehaviour
     private bool queuedRotation;
     
     public bool isUnderRoot;
+    public bool isWatered;
 
     public TileAsset Tile { get; private set; }
     public int Y { get; private set; }

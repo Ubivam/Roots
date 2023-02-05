@@ -44,6 +44,17 @@ public class LevelController : MonoBehaviour
 			t1.gameObject.transform.GetChild(0).transform.gameObject.SetActive(true);
 			
 		}
+		foreach (var tree in Level.trees)
+		{
+			if (tree.isWatered)
+			{
+				tree.gameObject.transform.GetChild(0).transform.gameObject.SetActive(true);
+			}
+			else
+			{
+				tree.gameObject.transform.GetChild(0).transform.gameObject.SetActive(false);
+			}
+		}
 		CheckEndGame();
 	}
 
@@ -81,6 +92,7 @@ public class LevelController : MonoBehaviour
 		foreach (var tile in tiles)
 		{
 			tile.isUnderRoot = false;
+			tile.isWatered = false;
 		}
 		_rootedTiles = new Queue<TileComponent>();
 		_rootedTilesList = new List<TileComponent>();
@@ -124,6 +136,11 @@ public class LevelController : MonoBehaviour
 						}
 					}
 				}
+			}
+
+			if (IsPondRooted())
+			{
+				tree.isWatered = true;
 			}
 			_isEndGame &= IsPondRooted();
 		}
