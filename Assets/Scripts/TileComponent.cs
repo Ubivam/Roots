@@ -41,7 +41,6 @@ public class TileComponent : MonoBehaviour
         {
             targetRotation *= Quaternion.Euler(0, rotationAngle, 0);
             StartCoroutine(Rotate());
-			audioSource.Play();
 		}
         else
         {
@@ -52,6 +51,9 @@ public class TileComponent : MonoBehaviour
     IEnumerator Rotate()
     {
         isRotating = true;
+
+		audioSource.enabled = true;
+		audioSource.Play();
 
 		Quaternion startRotation = transform.rotation;
         Quaternion endRotation = targetRotation;
