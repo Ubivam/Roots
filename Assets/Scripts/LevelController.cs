@@ -5,6 +5,7 @@ using UnityEngine.Serialization;
 public class LevelController : MonoBehaviour
 {
 	[SerializeField] private LevelInput levelInput;
+	[SerializeField] private MainMenu _mainMenu;
 	[FormerlySerializedAs("level")] [SerializeField] private Level backupLevel;
 	private Level Level => levelInput.Level != null ? levelInput.Level : backupLevel;
 	
@@ -15,6 +16,7 @@ public class LevelController : MonoBehaviour
 	private List<TileComponent> _rootedTilesList;
 	private bool _isEndGame;
 
+	private string PlayerPrefsKey => $"{_mainMenu.GetAllLevels().name}_LastFinishedIndex";
 	private void Start()
 	{
 		mainCamera = Camera.main;
@@ -163,6 +165,10 @@ public class LevelController : MonoBehaviour
 	{
 		if (_isEndGame)
 		{
+			var lastFinishedIndex = PlayerPrefs.GetInt(PlayerPrefsKey, -1);
+			lastFinishedIndex++;
+			PlayerPrefs.SetInt(PlayerPrefsKey, lastFinishedIndex);
+			_mainMenu.OnPlayClicked();
 			Debug.Log("End Game!");
 		}
 	}

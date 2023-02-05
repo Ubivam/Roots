@@ -5,11 +5,15 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private AllLevels levels;
     [SerializeField] private LevelInput levelInput;
-
+    [SerializeField] private bool resetToFirstLevel;
     private string PlayerPrefsKey => $"{levels.name}_LastFinishedIndex";
-    
+
     public void OnPlayClicked()
     {
+        if (resetToFirstLevel)
+        {
+            PlayerPrefs.SetInt(PlayerPrefsKey,0);
+        }
         var lastFinishedIndex = PlayerPrefs.GetInt(PlayerPrefsKey, -1);
         var levelToPlayIndex = lastFinishedIndex + 1;
 
@@ -25,5 +29,10 @@ public class MainMenu : MonoBehaviour
 
             SceneManager.LoadScene("Game");
         }
+    }
+
+    public AllLevels GetAllLevels()
+    {
+        return levels;
     }
 }
