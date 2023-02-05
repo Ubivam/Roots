@@ -19,7 +19,7 @@ MonoBehaviour:
     Rotation: 360
   - Tile: {fileID: 11400000, guid: 8ff5cd6c9e5ee5145b13b7d0b52aa3c1, type: 2}
     Rotation: 360
-  - Tile: {fileID: 11400000, guid: 8ff5cd6c9e5ee5145b13b7d0b52aa3c1, type: 2}
+  - Tile: {fileID: 11400000, guid: e99afe32933f5f7478ee65eee7c4acff, type: 2}
     Rotation: 360
   - Tile: {fileID: 11400000, guid: 8ff5cd6c9e5ee5145b13b7d0b52aa3c1, type: 2}
     Rotation: 360
@@ -33,5 +33,9 @@ MonoBehaviour:
     Rotation: 360
   SideLength: 3
   TilePrefab: {fileID: 452177637, guid: a3dfc42455085cd4992684c2ef7b7316, type: 3}
-  trees: []
-  ponds: []
+  trees:
+  - {fileID: 0}
+  - {fileID: 0}
+  ponds:
+  - {fileID: 0}
+  - {fileID: 0}
