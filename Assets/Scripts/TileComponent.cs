@@ -7,10 +7,12 @@ public class TileComponent : MonoBehaviour
 {
     [SerializeField] private float rotationAngle = -90f; // degrees
     [SerializeField] private float rotationTime = 0.5f; // seconds
+	[SerializeField] private AnimationCurve rotationCurve;
 
     private bool isRotating;
     private Quaternion targetRotation = Quaternion.identity;
     private bool queuedRotation;
+    private AudioSource audioSource;
     
     public bool isUnderRoot;
     public bool isWatered;
@@ -21,7 +23,12 @@ public class TileComponent : MonoBehaviour
 
     public Vector2Int Pos => new(X, Y);
 
-    public void Init(int x, int y, TileAsset tile)
+	private void Awake()
+	{
+		audioSource = GetComponent<AudioSource>();
+	}
+
+	public void Init(int x, int y, TileAsset tile)
     {
         X = x;
         Y = y;
@@ -34,7 +41,8 @@ public class TileComponent : MonoBehaviour
         {
             targetRotation *= Quaternion.Euler(0, rotationAngle, 0);
             StartCoroutine(Rotate());
-        }
+			audioSource.Play();
+		}
         else
         {
             queuedRotation = true;
@@ -44,7 +52,8 @@ public class TileComponent : MonoBehaviour
     IEnumerator Rotate()
     {
         isRotating = true;
-        Quaternion startRotation = transform.rotation;
+
+		Quaternion startRotation = transform.rotation;
         Quaternion endRotation = targetRotation;
         float startTime = Time.time;
         float endTime = startTime + rotationTime;
@@ -52,7 +61,7 @@ public class TileComponent : MonoBehaviour
         while (Time.time < endTime)
         {
             float t = (Time.time - startTime) / rotationTime;
-            transform.rotation = Quaternion.Lerp(startRotation, endRotation, t);
+            transform.rotation = Quaternion.Lerp(startRotation, endRotation, rotationCurve.Evaluate(t));
             yield return null;
         }
 

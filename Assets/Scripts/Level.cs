@@ -26,6 +26,9 @@ public class Level : ScriptableObject
 			return new List<TileComponent>();
 		}
 
+		var camera = FindObjectOfType<Camera>();
+		camera.orthographicSize = (float)SideLength * 4f / 3f;
+
 		var tiles = new List<TileComponent>();
 		trees = new List<TileComponent>();
 		ponds = new List<TileComponent>();
