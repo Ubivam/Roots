@@ -252,7 +252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels: {fileID: 11400000, guid: 009af7314fbcd304abb97456ff69a0c2, type: 2}
   levelInput: {fileID: 11400000, guid: c9f24d11d14b79a499d24bdf8ca38726, type: 2}
-  resetToFirstLevel: 1
+  resetToFirstLevel: 0
 --- !u!1 &6579412911230138132
 GameObject:
   m_ObjectHideFlags: 0
