@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -163,12 +162,10 @@ public class LevelEditor : MonoBehaviour
 	private void OnLevelSave()
 	{
 		ResetTileDropdown();
-
-		var uniqueFileName = AssetDatabase.GenerateUniqueAssetPath("Assets/Resources/Levels/" + levelNameInput.text + ".asset");
-		Debug.Log(uniqueFileName);
-
-		AssetDatabase.CreateAsset(level, uniqueFileName);
-
+#if UNITY_EDITOR
+		var uniqueFileName = UnityEditor.AssetDatabase.GenerateUniqueAssetPath("Assets/Resources/Levels/" + levelNameInput.text + ".asset");
+		UnityEditor.AssetDatabase.CreateAsset(level, uniqueFileName);
+#endif
 		// Create another level
 		var oldLevel = level;
 		level = ScriptableObject.CreateInstance<Level>();
