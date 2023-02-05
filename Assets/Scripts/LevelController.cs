@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -6,6 +7,7 @@ public class LevelController : MonoBehaviour
 {
 	[SerializeField] private LevelInput levelInput;
 	[SerializeField] private MainMenu _mainMenu;
+	[SerializeField] private TextMeshProUGUI _textMeshPro;
 	[FormerlySerializedAs("level")] [SerializeField] private Level backupLevel;
 	private Level Level => levelInput.Level != null ? levelInput.Level : backupLevel;
 	
@@ -19,6 +21,7 @@ public class LevelController : MonoBehaviour
 	private string PlayerPrefsKey => $"{_mainMenu.GetAllLevels().name}_LastFinishedIndex";
 	private void Start()
 	{
+		_textMeshPro.SetText("Level " + (PlayerPrefs.GetInt(PlayerPrefsKey, -1) + 1));
 		mainCamera = Camera.main;
 		layerMask = LayerMask.GetMask($"Tiles");
 
@@ -170,6 +173,7 @@ public class LevelController : MonoBehaviour
 			PlayerPrefs.SetInt(PlayerPrefsKey, lastFinishedIndex);
 			_mainMenu.OnPlayClicked();
 			Debug.Log("End Game!");
+			_textMeshPro.SetText("Level " + (PlayerPrefs.GetInt(PlayerPrefsKey, -1) + 1));
 		}
 	}
 
