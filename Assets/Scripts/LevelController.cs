@@ -1,10 +1,12 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class LevelController : MonoBehaviour
 {
-	[SerializeField] private Level level;
+	[SerializeField] private LevelInput levelInput;
+	[FormerlySerializedAs("level")] [SerializeField] private Level backupLevel;
+	private Level Level => levelInput.Level != null ? levelInput.Level : backupLevel;
 	
 	private Camera mainCamera;
 	private LayerMask layerMask;
@@ -12,13 +14,13 @@ public class LevelController : MonoBehaviour
 	private Queue<TileComponent> _rootedTiles;
 	private List<TileComponent> _rootedTilesList;
 	private bool _isEndGame;
-	[SerializeField] private Vector2Int drawGizmosForIndex;
 
 	private void Start()
 	{
 		mainCamera = Camera.main;
 		layerMask = LayerMask.GetMask($"Tiles");
-		tiles = level.InstantiateLevel(transform);
+
+		tiles = Level.InstantiateLevel(transform);
 		ReinitializeTiles();
 	}
 
@@ -64,7 +66,7 @@ public class LevelController : MonoBehaviour
 		}
 		_rootedTiles = new Queue<TileComponent>();
 		_rootedTilesList = new List<TileComponent>();
-		foreach (var tree in level.trees)
+		foreach (var tree in Level.trees)
 		{
 			tree.isUnderRoot = true;
 		}
@@ -76,7 +78,7 @@ public class LevelController : MonoBehaviour
 			tile.isUnderRoot = false;
 		}
 		_rootedTiles = new Queue<TileComponent>();
-		foreach (var tree in level.trees)
+		foreach (var tree in Level.trees)
 		{
 			tree.isUnderRoot = true;
 		}
@@ -84,7 +86,7 @@ public class LevelController : MonoBehaviour
 	private void  ExpandRootTiles()
 	{
 		_isEndGame = true;
-		foreach (var tree in level.trees)
+		foreach (var tree in Level.trees)
 		{
 			ClearTilesOnChangingToTheNextTree();
 			_rootedTiles.Enqueue(tree);
@@ -112,7 +114,7 @@ public class LevelController : MonoBehaviour
 	private bool IsPondRooted()
 	{
 		bool flag = false;
-		foreach (var pond in level.ponds)
+		foreach (var pond in Level.ponds)
 		{
 			if (pond.isUnderRoot)
 			{
@@ -150,9 +152,9 @@ public class LevelController : MonoBehaviour
 
 		bool IsValid(Vector2Int p)
 		{
-			if (p.x < 0 || p.x >= level.Width)
+			if (p.x < 0 || p.x >= Level.Width)
 				return false;
-			if (p.y < 0 || p.y >= level.Height)
+			if (p.y < 0 || p.y >= Level.Height)
 				return false;
 			var i = VectorToIndex(p);
 			return i >= 0 && i < tiles.Count && (pos - p).sqrMagnitude == 1f;
@@ -221,7 +223,7 @@ public class LevelController : MonoBehaviour
 		return tiles[index];
 	}
 
-	private Vector2Int IndexToVector(int index) => new(index % level.Width, index / level.Width);
+	private Vector2Int IndexToVector(int index) => new(index % Level.Width, index / Level.Width);
 
-	private int VectorToIndex(Vector2Int pos) => level.Width * pos.y + pos.x;
+	private int VectorToIndex(Vector2Int pos) => Level.Width * pos.y + pos.x;
 }
