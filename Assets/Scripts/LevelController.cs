@@ -40,6 +40,7 @@ public class LevelController : MonoBehaviour
 				var tile = hit.transform.parent.GetComponent<TileComponent>();
 				tile.Click();
 			}
+			ReinitializeTiles();
 		}
 	}
 
@@ -203,6 +204,11 @@ public class LevelController : MonoBehaviour
 		if (tiles == null)
 		{
 			return;
+		}
+
+		foreach (var tile in tiles)
+		{
+			tile.gameObject.transform.GetChild(0).transform.gameObject.SetActive(false);
 		}
 		
 		foreach (var (t0, t1) in GetConnectedTiles())
