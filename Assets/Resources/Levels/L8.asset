@@ -33,7 +33,7 @@ MonoBehaviour:
     Rotation: 180
   - Tile: {fileID: 11400000, guid: 8ff5cd6c9e5ee5145b13b7d0b52aa3c1, type: 2}
     Rotation: 90
-  - Tile: {fileID: 11400000, guid: e99afe32933f5f7478ee65eee7c4acff, type: 2}
+  - Tile: {fileID: 11400000, guid: 8ff5cd6c9e5ee5145b13b7d0b52aa3c1, type: 2}
     Rotation: 0
   - Tile: {fileID: 11400000, guid: 160c066d2f64047d786a6cee2afa74b2, type: 2}
     Rotation: 360
@@ -43,7 +43,7 @@ MonoBehaviour:
     Rotation: 270
   - Tile: {fileID: 11400000, guid: 8ff5cd6c9e5ee5145b13b7d0b52aa3c1, type: 2}
     Rotation: 360
-  - Tile: {fileID: 11400000, guid: 8ff5cd6c9e5ee5145b13b7d0b52aa3c1, type: 2}
+  - Tile: {fileID: 11400000, guid: 7eb432870c20a6a4f9692b23bf36d1c7, type: 2}
     Rotation: 360
   - Tile: {fileID: 11400000, guid: 160c066d2f64047d786a6cee2afa74b2, type: 2}
     Rotation: 360
@@ -65,5 +65,12 @@ MonoBehaviour:
     Rotation: 360
   SideLength: 5
   TilePrefab: {fileID: 452177637, guid: a3dfc42455085cd4992684c2ef7b7316, type: 3}
-  trees: []
-  ponds: []
+  trees:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  ponds:
+  - {fileID: 0}
+  - {fileID: 0}
