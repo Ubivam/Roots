@@ -6,6 +6,7 @@ public class LevelController : MonoBehaviour
 {
 	[SerializeField] private LevelInput levelInput;
 	[SerializeField] private MainMenu _mainMenu;
+	[SerializeField] private AudioSource _audioSource;
 	[FormerlySerializedAs("level")] [SerializeField] private Level backupLevel;
 	private Level Level => levelInput.Level != null ? levelInput.Level : backupLevel;
 	
@@ -21,6 +22,8 @@ public class LevelController : MonoBehaviour
 	{
 		mainCamera = Camera.main;
 		layerMask = LayerMask.GetMask($"Tiles");
+
+		_audioSource = GetComponent<AudioSource>();
 
 		tiles = Level.InstantiateLevel(transform);
 		ReinitializeTiles();
@@ -169,7 +172,9 @@ public class LevelController : MonoBehaviour
 			lastFinishedIndex++;
 			PlayerPrefs.SetInt(PlayerPrefsKey, lastFinishedIndex);
 			_mainMenu.OnPlayClicked();
-			Debug.Log("End Game!");
+
+			_audioSource.enabled = true;
+			_audioSource.Play();
 		}
 	}
 
@@ -237,30 +242,6 @@ public class LevelController : MonoBehaviour
 				return firstTile.GetConnectivity(TileAsset.Side.Down) && secondTile.GetConnectivity(TileAsset.Side.Up);
 			}
 		}
-	}
-
-	private void OnDrawGizmos()
-	{
-		// if (tiles == null)
-		// {
-		// 	return;
-		// }
-		//
-		// foreach (var tile in tiles)
-		// {
-		// 	tile.gameObject.transform.GetChild(0).transform.gameObject.SetActive(false);
-		// }
-		//
-		// foreach (var (t0, t1) in GetConnectedTiles())
-		// {
-		// 	Gizmos.color = Color.red;
-		// 	var offset = new Vector3(0, 0.1f, 0);
-		// 	Gizmos.DrawLine(t0.transform.position + offset, t1.transform.position + offset);
-		// 	t0.gameObject.transform.GetChild(0).transform.gameObject.SetActive(true);
-		// 	t1.gameObject.transform.GetChild(0).transform.gameObject.SetActive(true);
-		// 	
-		// }
-		// CheckEndGame();
 	}
 
 	private TileComponent GetTile(Vector2Int pos)

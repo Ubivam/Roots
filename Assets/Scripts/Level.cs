@@ -40,7 +40,7 @@ public class Level : ScriptableObject
 			var y = index / width;
 			
 			var tileGameObject = cell.Tile.InstantiateTile(TilePrefab);
-			tileGameObject.name = $"[{x}, {y}]";
+			tileGameObject.name = $"";
 			tileGameObject.transform.parent = parent;
 			var deltaPosition = new Vector3(x - height / 2f + 0.5f, 0.05f, y - width / 2f + 0.5f);
 			deltaPosition.x *= tileGameObject.transform.lossyScale.x;
