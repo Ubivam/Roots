@@ -8,7 +8,6 @@ public class LevelController : MonoBehaviour
 	[SerializeField] private LevelInput levelInput;
 	[SerializeField] private MainMenu _mainMenu;
 	[SerializeField] private TextMeshProUGUI _textMeshPro;
-	[SerializeField] private AudioSource _audioSource;
 	[FormerlySerializedAs("level")] [SerializeField] private Level backupLevel;
 	private Level Level => levelInput.Level != null ? levelInput.Level : backupLevel;
 	
@@ -18,6 +17,7 @@ public class LevelController : MonoBehaviour
 	private Queue<TileComponent> _rootedTiles;
 	private List<TileComponent> _rootedTilesList;
 	private bool _isEndGame;
+	private AudioSource _audioSource;
 
 	private string PlayerPrefsKey => $"{_mainMenu.GetAllLevels().name}_LastFinishedIndex";
 	private void Start()
