@@ -129,8 +129,7 @@ Shader "Custom/HSVRangeShader"
 				   float4 color = tex2D(_MainTex, IN.uv_MainTex);
 				   float3 hsv = rgb2hsv(color.rgb);
 				   float affectMult = step(_HSVRangeMin, hsv.r) * step(hsv.r, _HSVRangeMax);
-				   float3 hsvAdj = float3(_Time.x * 3, _HSVAAdjust.yz);
-				   float3 rgb = hsv2rgb(hsv + hsvAdj * affectMult);
+				   float3 rgb = hsv2rgb(hsv + _HSVAAdjust.xyz * affectMult);
 				   return float4(rgb, color.a + _HSVAAdjust.a);
 			   }
 
