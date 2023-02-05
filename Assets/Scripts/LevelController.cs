@@ -27,6 +27,24 @@ public class LevelController : MonoBehaviour
 	private void Update()
 	{
 		HandleClick();
+		
+		if (tiles == null)
+		{
+			return;
+		}
+		ReinitializeTiles();
+		foreach (var tile in tiles)
+		{
+			tile.gameObject.transform.GetChild(0).transform.gameObject.SetActive(false);
+		}
+		
+		foreach (var (t0, t1) in GetConnectedTiles())
+		{
+			t0.gameObject.transform.GetChild(0).transform.gameObject.SetActive(true);
+			t1.gameObject.transform.GetChild(0).transform.gameObject.SetActive(true);
+			
+		}
+		CheckEndGame();
 	}
 
 	private void HandleClick()
@@ -40,7 +58,6 @@ public class LevelController : MonoBehaviour
 				var tile = hit.transform.parent.GetComponent<TileComponent>();
 				tile.Click();
 			}
-			ReinitializeTiles();
 		}
 	}
 
@@ -201,26 +218,26 @@ public class LevelController : MonoBehaviour
 
 	private void OnDrawGizmos()
 	{
-		if (tiles == null)
-		{
-			return;
-		}
-
-		foreach (var tile in tiles)
-		{
-			tile.gameObject.transform.GetChild(0).transform.gameObject.SetActive(false);
-		}
-		
-		foreach (var (t0, t1) in GetConnectedTiles())
-		{
-			Gizmos.color = Color.red;
-			var offset = new Vector3(0, 0.1f, 0);
-			Gizmos.DrawLine(t0.transform.position + offset, t1.transform.position + offset);
-			t0.gameObject.transform.GetChild(0).transform.gameObject.SetActive(true);
-			t1.gameObject.transform.GetChild(0).transform.gameObject.SetActive(true);
-			
-		}
-		CheckEndGame();
+		// if (tiles == null)
+		// {
+		// 	return;
+		// }
+		//
+		// foreach (var tile in tiles)
+		// {
+		// 	tile.gameObject.transform.GetChild(0).transform.gameObject.SetActive(false);
+		// }
+		//
+		// foreach (var (t0, t1) in GetConnectedTiles())
+		// {
+		// 	Gizmos.color = Color.red;
+		// 	var offset = new Vector3(0, 0.1f, 0);
+		// 	Gizmos.DrawLine(t0.transform.position + offset, t1.transform.position + offset);
+		// 	t0.gameObject.transform.GetChild(0).transform.gameObject.SetActive(true);
+		// 	t1.gameObject.transform.GetChild(0).transform.gameObject.SetActive(true);
+		// 	
+		// }
+		// CheckEndGame();
 	}
 
 	private TileComponent GetTile(Vector2Int pos)
