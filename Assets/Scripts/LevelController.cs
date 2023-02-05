@@ -8,6 +8,7 @@ public class LevelController : MonoBehaviour
 	[SerializeField] private LevelInput levelInput;
 	[SerializeField] private MainMenu _mainMenu;
 	[SerializeField] private TextMeshProUGUI _textMeshPro;
+	[SerializeField] private AudioSource _audioSource;
 	[FormerlySerializedAs("level")] [SerializeField] private Level backupLevel;
 	private Level Level => levelInput.Level != null ? levelInput.Level : backupLevel;
 	
@@ -24,6 +25,8 @@ public class LevelController : MonoBehaviour
 		_textMeshPro.SetText("Level " + (PlayerPrefs.GetInt(PlayerPrefsKey, -1) + 1));
 		mainCamera = Camera.main;
 		layerMask = LayerMask.GetMask($"Tiles");
+
+		_audioSource = GetComponent<AudioSource>();
 
 		tiles = Level.InstantiateLevel(transform);
 		ReinitializeTiles();
@@ -172,6 +175,9 @@ public class LevelController : MonoBehaviour
 			lastFinishedIndex++;
 			PlayerPrefs.SetInt(PlayerPrefsKey, lastFinishedIndex);
 			_mainMenu.OnPlayClicked();
+
+			_audioSource.enabled = true;
+			_audioSource.Play();
 			Debug.Log("End Game!");
 			_textMeshPro.SetText("Level " + (PlayerPrefs.GetInt(PlayerPrefsKey, -1) + 1));
 		}

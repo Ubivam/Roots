@@ -17,9 +17,12 @@ public class MainMenu : MonoBehaviour
         var lastFinishedIndex = PlayerPrefs.GetInt(PlayerPrefsKey, -1);
         var levelToPlayIndex = lastFinishedIndex;
 
-        if (levelToPlayIndex >= 0 && levelToPlayIndex < levels.Levels.Count)
+
+        if (levelToPlayIndex >= 0)
         {
-            levelInput.LevelName = $"Level {levelToPlayIndex + 1}";
+			levelToPlayIndex %= levels.Levels.Count;
+
+			levelInput.LevelName = $"Level {levelToPlayIndex + 1}";
             levelInput.Level = levels.Levels[levelToPlayIndex];
             levelInput.OnLevelFinished = () =>
             {
