@@ -15,7 +15,7 @@ public class MainMenu : MonoBehaviour
             PlayerPrefs.SetInt(PlayerPrefsKey,0);
         }
         var lastFinishedIndex = PlayerPrefs.GetInt(PlayerPrefsKey, -1);
-        var levelToPlayIndex = lastFinishedIndex + 1;
+        var levelToPlayIndex = lastFinishedIndex;
 
         if (levelToPlayIndex >= 0 && levelToPlayIndex < levels.Levels.Count)
         {
